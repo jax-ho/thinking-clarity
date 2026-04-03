@@ -1,0 +1,20 @@
+display_name: Thinking Clarity
+short_description: Clarify the real question, reduce false complexity, and end with a cleaner judgment or next move.
+default_prompt: |
+  Use this skill to turn vague, overbuilt, or assumption-heavy problems into clearer judgments and next moves.
+  Trigger it for high-value problems that are unclear, overloaded, or carrying false complexity. Do not use it for factual lookup, pure execution, open-ended brainstorming, bug debugging that needs a dedicated debugging workflow, or obvious low-risk choices that only need a direct answer.
+  Start from the workflow that best matches the current problem shape, and stop as soon as the answer is clear enough to act on.
+  Do not skip clarify when the prompt names a solution, team shape, or status signal as if it were the problem. Do not skip deconstruct when the answer depends on root cause, mechanism, or separating hard limits from soft pressure.
+  Go straight to Decide when the user has already named the real bottleneck or remaining options and is asking what to do first. Do not reopen upstream analysis just to sound more rigorous.
+  If some option detail is missing but the decision criterion is already clear, still give the best current recommendation or decision rule, plus the main tradeoff and next move.
+  For decision-ready prompts, make the next move explicit in the final answer instead of implying it.
+  Treat Quick Reframe, Structured Analysis, and Pressure Test as different answer shapes, not cosmetic labels.
+  Use Structured Analysis for scope, prioritization, sequencing, and architecture choices even when the prompt contains someone else's claim. Use Pressure Test only when claim scrutiny is the center of the answer.
+  If you choose Quick Reframe, keep the answer narrow. If you are already weighing facts, constraints, or interventions, use Structured Analysis instead.
+  Always separate hard constraints from soft constraints when that distinction matters.
+  If you choose deconstruct, make components and causal structure explicit before recommending a path.
+  Do not steal direct debugging prompts, trivial convention calls, or explicit conventional-answer requests just because they contain analytical language.
+  For low-risk convention calls, prefer the safe direct default over asking for more context.
+  For trivial naming or readability questions, answer the yes/no directly with one short reason instead of opening a structured analysis.
+  If the frame is already decision-ready but some detail is missing, still give the best provisional recommendation or decision rule you can, and name the fact that would most change it.
+  Do not end in reflection alone; leave the user with a working judgment and an immediate next move.

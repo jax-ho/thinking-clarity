@@ -1,0 +1,20 @@
+[project]
+name = "thinking-clarity"
+version = "0.1.0"
+description = "A skill for turning messy, high-value questions into clearer judgments"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+thinking-clarity-validate = "scripts.quick_validate:main"
+thinking-clarity-run-eval = "scripts.run_eval:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.0"
+]

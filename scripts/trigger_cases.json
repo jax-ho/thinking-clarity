@@ -1,0 +1,244 @@
+[
+  {
+    "id": "trigger-tech-microservice-simplify",
+    "prompt": "Do we really need this microservice split right now?",
+    "category": "technical",
+    "case_type": "clean_trigger",
+    "should_trigger": true,
+    "expected_effects": [
+      "narrows the question around current operational need instead of abstract architectural maturity",
+      "gives a recommendation about whether to keep or split the service now",
+      "ends with a concrete next move"
+    ],
+    "disallowed_effects": [
+      "generic pros and cons only",
+      "architecture theater without a decision"
+    ],
+    "failure_risk": "false sophistication",
+    "why_this_case_exists": "Tests whether the skill reduces false architectural complexity and still lands on action."
+  },
+  {
+    "id": "trigger-messy-architecture-fear",
+    "prompt": "I think we need a better architecture because the codebase feels risky and maybe we should split teams soon and we also need to move faster.",
+    "category": "technical",
+    "case_type": "messy_trigger",
+    "should_trigger": true,
+    "expected_effects": [
+      "separates architecture, team design, and delivery speed into a clearer problem frame",
+      "identifies the real goal underneath the mixed fears",
+      "ends with one immediate next move rather than a long abstract analysis"
+    ],
+    "disallowed_effects": [
+      "jumps straight to recommending architecture changes without reframing the problem",
+      "returns only generic best practices"
+    ],
+    "failure_risk": "solving the wrong question",
+    "why_this_case_exists": "Tests whether the skill can turn a muddled prompt into a cleaner question."
+  },
+  {
+    "id": "trigger-mvp-soft-constraint-sso",
+    "prompt": "Leadership says enterprise SSO must be in the MVP because serious buyers expect it, but we only have two weeks. Is that actually required right now?",
+    "category": "product",
+    "case_type": "boundary_stress",
+    "should_trigger": true,
+    "expected_effects": [
+      "distinguishes hard delivery limits from softer organizational or buyer assumptions",
+      "gives a recommendation about whether SSO belongs in the MVP now",
+      "ends with a concrete validation step"
+    ],
+    "disallowed_effects": [
+      "treats the leadership claim as automatically decisive",
+      "stays at abstract commentary without a decision"
+    ],
+    "failure_risk": "soft constraint hardening",
+    "why_this_case_exists": "Tests whether the skill can reduce a requirement claim into a usable scope decision."
+  },
+  {
+    "id": "trigger-proposal-pressure-test",
+    "prompt": "Pressure-test this argument: we need enterprise SSO in the MVP or no serious buyer will even talk to us.",
+    "category": "product",
+    "case_type": "clean_trigger",
+    "should_trigger": true,
+    "expected_effects": [
+      "organizes the answer around the claim and its weak assumptions",
+      "names missing evidence or contradiction",
+      "concludes with what survives scrutiny and a next move"
+    ],
+    "disallowed_effects": [
+      "treats the argument as true without challenge",
+      "turns into a generic roadmap discussion"
+    ],
+    "failure_risk": "mode drift",
+    "why_this_case_exists": "Tests whether the skill can really pressure-test a claim rather than only sounding analytical."
+  },
+  {
+    "id": "trigger-direct-decide-refactor-choice",
+    "prompt": "We already know the bottleneck is review latency. Three refactor options remain and I only want the one we should do first.",
+    "category": "technical",
+    "case_type": "clean_trigger",
+    "should_trigger": true,
+    "expected_effects": [
+      "acts on the fact that the problem is already clear",
+      "gives a decisive recommendation instead of reopening upstream analysis",
+      "names the main tradeoff or risk and the next move"
+    ],
+    "disallowed_effects": [
+      "reframes the problem unnecessarily",
+      "lists options without choosing"
+    ],
+    "failure_risk": "analysis reopening",
+    "why_this_case_exists": "Tests whether the skill can go straight to decision when the frame is already clear."
+  },
+  {
+    "id": "trigger-launch-scope-convergence",
+    "prompt": "We have eight launch features and three user personas. What is the smallest launch scope that still proves the product is real?",
+    "category": "product",
+    "case_type": "clean_trigger",
+    "should_trigger": true,
+    "expected_effects": [
+      "reduces the problem to the smallest proof of value",
+      "removes unnecessary launch complexity",
+      "ends with a recommendation and immediate next move"
+    ],
+    "disallowed_effects": [
+      "tries to preserve all personas or features by default",
+      "talks about MVP philosophy without narrowing scope"
+    ],
+    "failure_risk": "bloated MVP",
+    "why_this_case_exists": "Tests whether the skill can converge product scope around proof rather than completeness."
+  },
+  {
+    "id": "trigger-ai-experiment-ordering",
+    "prompt": "For this AI assistant, we could try prompt iteration, RAG, fine-tuning, or a planner. What is the best experiment order if the goal is to learn quickly rather than build the fanciest system?",
+    "category": "ai_system_design",
+    "case_type": "clean_trigger",
+    "should_trigger": true,
+    "expected_effects": [
+      "orders the experiments by learning value rather than system ambition",
+      "keeps the answer grounded in current uncertainty and cheapest informative step",
+      "ends with a recommendation and next move"
+    ],
+    "disallowed_effects": [
+      "defaults to the fanciest architecture first",
+      "stays at generic AI strategy commentary"
+    ],
+    "failure_risk": "premature system complexity",
+    "why_this_case_exists": "Tests whether the skill helps sequence AI experiments toward faster learning."
+  },
+  {
+    "id": "trigger-platform-team-or-process-fix",
+    "prompt": "People keep saying we need a platform team, but the actual complaints are slow deploys, unclear ownership, and flaky tooling. What problem are we really deciding about?",
+    "category": "technical",
+    "case_type": "messy_trigger",
+    "should_trigger": true,
+    "expected_effects": [
+      "separates the named team solution from the actual operational problem",
+      "makes the diagnosis problem clearer before recommending org structure",
+      "ends with a concrete next move for testing the real cause"
+    ],
+    "disallowed_effects": [
+      "jumps straight to endorsing a platform team",
+      "stays only in abstract org design language"
+    ],
+    "failure_risk": "org-structure substitution",
+    "why_this_case_exists": "Tests whether the skill can diagnose the real decision before choosing a team topology."
+  },
+  {
+    "id": "non-trigger-debugging-adjacent",
+    "prompt": "The service returns 500 when I submit this payload. Where is the bug most likely?",
+    "category": "debugging",
+    "case_type": "adjacent_skill_false_positive",
+    "should_trigger": false,
+    "expected_effects": [
+      "treats this as a debugging question",
+      "answers directly or points toward concrete debugging steps"
+    ],
+    "disallowed_effects": [
+      "reframes this into a broader strategic or architectural question",
+      "adds unnecessary recommendation or next-move structure unrelated to debugging"
+    ],
+    "failure_risk": "wrong-skill trigger",
+    "why_this_case_exists": "Tests whether the skill stays out of dedicated debugging work."
+  },
+  {
+    "id": "non-trigger-brainstorming-adjacent",
+    "prompt": "Give me 10 fresh ideas for AI features we could explore this quarter.",
+    "category": "brainstorming",
+    "case_type": "adjacent_skill_false_positive",
+    "should_trigger": false,
+    "expected_effects": [
+      "treats this as ideation rather than problem compression",
+      "does not force a reframing workflow before giving ideas"
+    ],
+    "disallowed_effects": [
+      "turns the request into a recommendation workflow",
+      "refuses to ideate because the problem is too open"
+    ],
+    "failure_risk": "wrong-skill trigger",
+    "why_this_case_exists": "Tests whether open-ended ideation is left to brainstorming-style behavior."
+  },
+  {
+    "id": "non-trigger-execution-disguised-as-analysis",
+    "prompt": "Can you think through the cleanest way to rename this variable to userId across the file and just do it?",
+    "category": "execution",
+    "case_type": "adjacent_skill_false_positive",
+    "should_trigger": false,
+    "expected_effects": [
+      "recognizes that the real task is still direct execution",
+      "does not inflate the request into a reasoning workflow"
+    ],
+    "disallowed_effects": [
+      "adds unnecessary reframing",
+      "turns a small edit into a strategy discussion"
+    ],
+    "failure_risk": "wrong-skill trigger",
+    "why_this_case_exists": "Tests whether mechanical execution disguised with reasoning language still stays out of this skill."
+  },
+  {
+    "id": "non-trigger-factual",
+    "prompt": "What is the capital of Japan?",
+    "category": "factual",
+    "case_type": "non_trigger",
+    "should_trigger": false,
+    "expected_effects": [
+      "answers the factual question directly"
+    ],
+    "disallowed_effects": [
+      "adds reframing, recommendation, or next-step structure"
+    ],
+    "failure_risk": "over-analysis",
+    "why_this_case_exists": "Tests whether factual lookup stays direct."
+  },
+  {
+    "id": "non-trigger-explicit-direct-answer",
+    "prompt": "Give me the conventional pros and cons of monorepo vs polyrepo without reframing my situation.",
+    "category": "direct_answer",
+    "case_type": "adjacent_skill_false_positive",
+    "should_trigger": false,
+    "expected_effects": [
+      "respects the explicit request for a conventional answer",
+      "does not insert a thinking-clarity reframing layer"
+    ],
+    "disallowed_effects": [
+      "reframes the problem despite the user's explicit instruction",
+      "turns the answer into a recommendation workflow"
+    ],
+    "failure_risk": "ignoring explicit user intent",
+    "why_this_case_exists": "Tests whether explicit direct-answer requests block the skill."
+  },
+  {
+    "id": "non-trigger-obvious-low-risk-choice",
+    "prompt": "Should I rename this helper method to make it clearer?",
+    "category": "low_risk",
+    "case_type": "non_trigger",
+    "should_trigger": false,
+    "expected_effects": [
+      "treats the choice as low risk and answers directly"
+    ],
+    "disallowed_effects": [
+      "inflates a trivial choice into a full analysis workflow"
+    ],
+    "failure_risk": "unnecessary analysis",
+    "why_this_case_exists": "Tests whether obvious low-risk choices stay lightweight."
+  }
+]

@@ -1,0 +1,338 @@
+[
+  {
+    "id": "tech-microservice-simplify",
+    "prompt": "Do we really need this microservice split right now?",
+    "category": "technical",
+    "case_type": "clean_trigger",
+    "should_trigger": true,
+    "routing_expectation": "primary",
+    "expected_workflow": "Simplify -> Decide",
+    "expected_mode": "Structured Analysis",
+    "required_fields": [
+      "real goal",
+      "what must be preserved",
+      "options or moving parts",
+      "recommendation",
+      "next move"
+    ],
+    "failure_risk": "false sophistication",
+    "why_this_case_exists": "Tests whether the skill reduces architecture complexity without drifting into architecture theater."
+  },
+  {
+    "id": "product-onboarding-simplify",
+    "prompt": "What can we remove from this onboarding flow without hurting activation?",
+    "category": "product",
+    "case_type": "clean_trigger",
+    "should_trigger": true,
+    "routing_expectation": "primary",
+    "expected_workflow": "Simplify -> Decide",
+    "expected_mode": "Structured Analysis",
+    "required_fields": [
+      "real goal",
+      "what must be preserved",
+      "what can be removed",
+      "simplest sufficient option",
+      "recommendation",
+      "next move"
+    ],
+    "failure_risk": "false simplicity",
+    "why_this_case_exists": "Tests whether simplification preserves user outcome instead of just cutting scope."
+  },
+  {
+    "id": "ai-agent-vs-workflow",
+    "prompt": "Should we build an agent system or just script the workflow first?",
+    "category": "ai-system-design",
+    "case_type": "clean_trigger",
+    "should_trigger": true,
+    "routing_expectation": "primary",
+    "expected_workflow": "Simplify -> Decide",
+    "acceptable_workflows": [
+      "Simplify -> Decide",
+      "Clarify -> Deconstruct -> Simplify -> Decide"
+    ],
+    "expected_mode": "Structured Analysis",
+    "required_fields": [
+      "real goal",
+      "decision-relevant facts",
+      "hard constraints",
+      "recommendation",
+      "next move"
+    ],
+    "failure_risk": "recommendation theater",
+    "why_this_case_exists": "Tests whether the skill prefers the smallest validating path over framework over-design."
+  },
+  {
+    "id": "messy-architecture-fear",
+    "prompt": "I think we need a better architecture because the codebase feels risky and maybe we should split teams soon and we also need to move faster.",
+    "category": "technical",
+    "case_type": "messy_trigger",
+    "should_trigger": true,
+    "routing_expectation": "primary",
+    "expected_workflow": "Clarify",
+    "expected_mode": "Quick Reframe",
+    "required_fields": [
+      "surface question",
+      "real goal",
+      "reframed question",
+      "next move"
+    ],
+    "failure_risk": "solving the wrong question",
+    "why_this_case_exists": "Tests whether the skill separates architecture, team design, and delivery fears before deeper analysis."
+  },
+  {
+    "id": "boundary-deconstruct-vs-simplify",
+    "prompt": "We have three service boundaries, growing latency, and duplicated logic. Is the real issue architecture complexity or just poor separation?",
+    "category": "technical",
+    "case_type": "boundary_stress",
+    "should_trigger": true,
+    "routing_expectation": "primary",
+    "expected_workflow": "Deconstruct -> Decide",
+    "acceptable_workflows": [
+      "Deconstruct -> Decide",
+      "Deconstruct"
+    ],
+    "expected_mode": "Structured Analysis",
+    "required_fields": [
+      "real goal",
+      "components",
+      "decision-relevant facts",
+      "hard constraints",
+      "causal structure",
+      "recommendation",
+      "next move"
+    ],
+    "failure_risk": "premature simplification",
+    "why_this_case_exists": "Tests whether the skill explains the structure before jumping to solution simplification."
+  },
+  {
+    "id": "mvp-soft-constraint-sso",
+    "prompt": "Leadership says enterprise SSO must be in the MVP because serious buyers expect it, but we only have two weeks. Is that actually required right now?",
+    "category": "product",
+    "case_type": "boundary_stress",
+    "should_trigger": true,
+    "routing_expectation": "primary",
+    "expected_workflow": "Deconstruct -> Simplify -> Decide",
+    "expected_mode": "Structured Analysis",
+    "required_fields": [
+      "real goal",
+      "hard constraints",
+      "soft constraints",
+      "recommendation",
+      "next move"
+    ],
+    "failure_risk": "treating soft constraints as fixed",
+    "why_this_case_exists": "Tests whether the skill distinguishes buyer signal from organizational pressure and avoids upgrading soft constraints into hard ones."
+  },
+  {
+    "id": "proposal-pressure-test",
+    "prompt": "Pressure-test this argument: we need enterprise SSO in the MVP or no serious buyer will even talk to us.",
+    "category": "product",
+    "case_type": "clean_trigger",
+    "should_trigger": true,
+    "routing_expectation": "primary",
+    "expected_workflow": "Deconstruct -> Decide",
+    "expected_mode": "Pressure Test",
+    "required_fields": [
+      "claim under test",
+      "weak assumptions",
+      "missing evidence or contradiction",
+      "what survives scrutiny",
+      "recommendation",
+      "next move"
+    ],
+    "failure_risk": "mode drift",
+    "why_this_case_exists": "Tests whether pressure-testing changes the answer shape instead of producing a generic structured analysis."
+  },
+  {
+    "id": "direct-decide-refactor-choice",
+    "prompt": "We already know the bottleneck is review latency. Three refactor options remain and I only want the one we should do first.",
+    "category": "technical",
+    "case_type": "clean_trigger",
+    "should_trigger": true,
+    "routing_expectation": "primary",
+    "expected_workflow": "Decide",
+    "expected_mode": "Structured Analysis",
+    "required_fields": [
+      "real goal",
+      "what is now clear",
+      "best current recommendation",
+      "main tradeoff or risk",
+      "next move"
+    ],
+    "failure_risk": "reopening solved analysis",
+    "why_this_case_exists": "Tests whether the skill can route directly to a decision when framing and structure are already sufficiently clear."
+  },
+  {
+    "id": "refactor-worth-doing-now",
+    "prompt": "We keep saying we need a major refactor before shipping the next set of features. Is the refactor actually worth doing now, or are we using cleanliness anxiety to avoid delivery risk?",
+    "category": "technical",
+    "case_type": "clean_trigger",
+    "should_trigger": true,
+    "routing_expectation": "primary",
+    "expected_workflow": "Deconstruct -> Decide",
+    "expected_mode": "Structured Analysis",
+    "required_fields": [
+      "real goal",
+      "decision-relevant facts",
+      "hard constraints",
+      "soft constraints",
+      "recommendation",
+      "next move"
+    ],
+    "failure_risk": "refactor theater",
+    "why_this_case_exists": "Tests whether the skill distinguishes real structural need from discomfort-driven refactor pressure."
+  },
+  {
+    "id": "launch-scope-convergence",
+    "prompt": "We have eight launch features and three user personas. What is the smallest launch scope that still proves the product is real?",
+    "category": "product",
+    "case_type": "clean_trigger",
+    "should_trigger": true,
+    "routing_expectation": "primary",
+    "expected_workflow": "Simplify -> Decide",
+    "expected_mode": "Structured Analysis",
+    "required_fields": [
+      "real goal",
+      "what must be preserved",
+      "what can be removed",
+      "simplest sufficient option",
+      "recommendation",
+      "next move"
+    ],
+    "failure_risk": "bloated MVP",
+    "why_this_case_exists": "Tests whether the skill can converge product scope around proof of value instead of trying to look complete."
+  },
+  {
+    "id": "ai-experiment-ordering",
+    "prompt": "For this AI assistant, we could try prompt iteration, RAG, fine-tuning, or a planner. What is the best experiment order if the goal is to learn quickly rather than build the fanciest system?",
+    "category": "ai-system-design",
+    "case_type": "clean_trigger",
+    "should_trigger": true,
+    "routing_expectation": "primary",
+    "expected_workflow": "Simplify -> Decide",
+    "acceptable_workflows": [
+      "Simplify -> Decide",
+      "Deconstruct -> Simplify -> Decide"
+    ],
+    "expected_mode": "Structured Analysis",
+    "required_fields": [
+      "real goal",
+      "decision-relevant facts",
+      "options or moving parts",
+      "recommendation",
+      "next move"
+    ],
+    "failure_risk": "premature system complexity",
+    "why_this_case_exists": "Tests whether the skill orders AI experiments by learning value instead of architectural ambition."
+  },
+  {
+    "id": "platform-team-or-process-fix",
+    "prompt": "People keep saying we need a platform team, but the actual complaints are slow deploys, unclear ownership, and flaky tooling. What problem are we really deciding about?",
+    "category": "technical",
+    "case_type": "messy_trigger",
+    "should_trigger": true,
+    "routing_expectation": "primary",
+    "expected_workflow": "Clarify -> Deconstruct -> Decide",
+    "expected_mode": "Structured Analysis",
+    "required_fields": [
+      "real goal",
+      "reframed question",
+      "decision-relevant facts",
+      "recommendation",
+      "next move"
+    ],
+    "failure_risk": "org-structure substitution",
+    "why_this_case_exists": "Tests whether the skill avoids jumping from delivery pain straight to team-topology conclusions."
+  },
+  {
+    "id": "debugging-adjacent",
+    "prompt": "The service returns 500 when I submit this payload. Where is the bug most likely?",
+    "category": "debugging",
+    "case_type": "adjacent_skill_false_positive",
+    "should_trigger": false,
+    "routing_expectation": "should_not_win",
+    "expected_workflow": "none",
+    "expected_mode": "none",
+    "required_fields": [],
+    "failure_risk": "wrong-skill trigger",
+    "why_this_case_exists": "Tests whether debugging-heavy prompts are left to debugging workflows instead of general reasoning clarity."
+  },
+  {
+    "id": "brainstorming-adjacent",
+    "prompt": "Give me 10 fresh ideas for AI features we could explore this quarter.",
+    "category": "brainstorming",
+    "case_type": "adjacent_skill_false_positive",
+    "should_trigger": false,
+    "routing_expectation": "should_not_win",
+    "expected_workflow": "none",
+    "expected_mode": "none",
+    "required_fields": [],
+    "failure_risk": "wrong-skill trigger",
+    "why_this_case_exists": "Tests whether open-ended ideation is left to brainstorming rather than routed into reasoning compression."
+  },
+  {
+    "id": "execution-disguised-as-analysis",
+    "prompt": "Can you think through the cleanest way to rename this variable to userId across the file and just do it?",
+    "category": "execution",
+    "case_type": "adjacent_skill_false_positive",
+    "should_trigger": false,
+    "routing_expectation": "should_not_win",
+    "expected_workflow": "none",
+    "expected_mode": "none",
+    "required_fields": [],
+    "failure_risk": "wrong-skill trigger",
+    "why_this_case_exists": "Tests whether execution asks disguised as reasoning do not hijack the skill."
+  },
+  {
+    "id": "factual-non-trigger",
+    "prompt": "What is the capital of Japan?",
+    "category": "factual",
+    "case_type": "non_trigger",
+    "should_trigger": false,
+    "routing_expectation": "should_not_win",
+    "expected_workflow": "none",
+    "expected_mode": "none",
+    "required_fields": [],
+    "failure_risk": "over-analysis",
+    "why_this_case_exists": "Tests whether factual lookups do not activate the skill."
+  },
+  {
+    "id": "mechanical-non-trigger",
+    "prompt": "Rename this variable to userId in the file.",
+    "category": "execution",
+    "case_type": "non_trigger",
+    "should_trigger": false,
+    "routing_expectation": "should_not_win",
+    "expected_workflow": "none",
+    "expected_mode": "none",
+    "required_fields": [],
+    "failure_risk": "wrong-skill trigger",
+    "why_this_case_exists": "Tests whether execution-only prompts are left to direct execution rather than routed into reasoning analysis."
+  },
+  {
+    "id": "obvious-low-risk-choice",
+    "prompt": "Should I rename this helper method to make it clearer?",
+    "category": "low-risk",
+    "case_type": "non_trigger",
+    "should_trigger": false,
+    "routing_expectation": "should_not_win",
+    "expected_workflow": "none",
+    "expected_mode": "none",
+    "required_fields": [],
+    "failure_risk": "unnecessary analysis",
+    "why_this_case_exists": "Tests whether trivial low-risk choices do not get inflated into a reasoning workflow."
+  },
+  {
+    "id": "explicit-direct-answer-request",
+    "prompt": "Give me the conventional pros and cons of monorepo vs polyrepo without reframing my situation.",
+    "category": "direct-answer",
+    "case_type": "adjacent_skill_false_positive",
+    "should_trigger": false,
+    "routing_expectation": "should_not_win",
+    "expected_workflow": "none",
+    "expected_mode": "none",
+    "required_fields": [],
+    "failure_risk": "ignoring explicit user intent",
+    "why_this_case_exists": "Tests whether the skill respects cases where the user explicitly wants a standard answer rather than reframing."
+  }
+]
