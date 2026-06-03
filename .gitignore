@@ -3,6 +3,7 @@ __pycache__/
 .pytest_cache/
 .claude/
 .DS_Store
+.skill-evolver/
 scripts/eval_results/
 *.log
 *.pyc
