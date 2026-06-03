@@ -27,7 +27,7 @@ Use this skill when:
 Do not use this skill for:
 
 - simple factual lookup
-- purely mechanical execution tasks
+- purely mechanical execution or tool-use tasks, including file edits, command runs, and other concrete actions the user asked you to perform
 - obvious low-risk choices where a direct yes/no or small convention call is enough
 - situations where the user clearly wants only a direct conventional answer without reframing
 - specific bug debugging, incident triage, traceback chasing, or payload-specific failure analysis where a dedicated debugging workflow should lead
@@ -84,6 +84,7 @@ Additional contract rules:
 - If the answer contains a working recommendation based on facts, constraints, or compared interventions, do not label it `Quick Reframe`.
 - If the answer is organized around scope, priority, or sequencing under constraints, do not label it `Pressure Test` unless claim scrutiny is the actual center of gravity.
 - If the prompt is really a direct debugging request or a trivial low-risk choice, do not force this output contract onto it.
+- If the prompt is a direct execution or simple command request, do not answer with a hypothetical plan; handle it through the normal execution/tool path and report the result.
 - If the prompt is a low-risk convention call, prefer the safe direct default over asking for more context.
 - For trivial readability or naming questions, the safe direct default is usually enough: answer the yes/no, give one short reason, and stop.
 
