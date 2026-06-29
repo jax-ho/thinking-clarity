@@ -4,15 +4,16 @@ from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+SKILL_ROOT = ROOT / "skills" / "thinking-clarity"
 CONTRACT_CASES_PATH = ROOT / "scripts" / "validation_cases.json"
 TRIGGER_CASES_PATH = ROOT / "scripts" / "trigger_cases.json"
-SKILL_PATH = ROOT / "SKILL.md"
-AGENT_PATH = ROOT / "agents" / "openai.yaml"
+SKILL_PATH = SKILL_ROOT / "SKILL.md"
+AGENT_PATH = SKILL_ROOT / "agents" / "openai.yaml"
 WORKFLOW_PATHS = {
-    "clarify": ROOT / "workflows" / "clarify.md",
-    "deconstruct": ROOT / "workflows" / "deconstruct.md",
-    "simplify": ROOT / "workflows" / "simplify.md",
-    "decide": ROOT / "workflows" / "decide.md",
+    "clarify": SKILL_ROOT / "workflows" / "clarify.md",
+    "deconstruct": SKILL_ROOT / "workflows" / "deconstruct.md",
+    "simplify": SKILL_ROOT / "workflows" / "simplify.md",
+    "decide": SKILL_ROOT / "workflows" / "decide.md",
 }
 
 CONTRACT_REQUIRED_KEYS = {
@@ -221,6 +222,13 @@ REQUIRED_NON_TRIGGER_CATEGORIES = {
     "low_risk",
 }
 REQUIRED_TRIGGER_CATEGORIES = {"technical", "product", "ai_system_design"}
+DISALLOWED_SKILL_PACKAGE_PATHS = [
+    "scripts",
+    "tests",
+    "pyproject.toml",
+    "uv.lock",
+    ".github",
+]
 
 
 def load_json(path: Path) -> list[dict]:
@@ -237,6 +245,18 @@ def validate_docs() -> None:
         if missing:
             raise ValueError(
                 f"{path.relative_to(ROOT)} missing expected fragments: {missing}"
+            )
+
+
+def validate_repository_layout() -> None:
+    if not SKILL_ROOT.exists():
+        raise ValueError(f"Installable skill package missing: {SKILL_ROOT.relative_to(ROOT)}")
+    if (ROOT / "SKILL.md").exists():
+        raise ValueError("Root SKILL.md should not exist; use skills/thinking-clarity/SKILL.md")
+    for relative in DISALLOWED_SKILL_PACKAGE_PATHS:
+        if (SKILL_ROOT / relative).exists():
+            raise ValueError(
+                f"{relative} should stay outside the installable skill package"
             )
 
 
@@ -527,6 +547,7 @@ def summarize_trigger_cases(cases: list[dict]) -> None:
 
 
 def main() -> None:
+    validate_repository_layout()
     validate_docs()
 
     contract_cases = [normalize_contract_case(case) for case in load_json(CONTRACT_CASES_PATH)]
@@ -537,6 +558,7 @@ def main() -> None:
     validate_trigger_cases(trigger_cases)
     validate_trigger_coverage(trigger_cases)
 
+    print("PASS: repository layout check")
     print("PASS: documentation contract check")
     print("PASS: contract case schema check")
     print("PASS: contract coverage check")

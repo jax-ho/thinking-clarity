@@ -1,6 +1,8 @@
 # Scripts Usage
 
-This directory contains the validation and evaluation entry points for the `thinking-clarity` skill.
+This directory contains repository-level validation and evaluation entry points for the `thinking-clarity` skill.
+
+These scripts are not part of the installable skill package. The package lives at `skills/thinking-clarity/`; the scripts read that folder as their skill source.
 
 ## What Each Script Does
 
@@ -18,7 +20,7 @@ Use this first after any content edit.
 Command:
 
 ```bash
-python3 scripts/quick_validate.py
+uv run python scripts/quick_validate.py
 ```
 
 ### `run_eval.py`
@@ -39,7 +41,7 @@ Default runner:
 Recommended command:
 
 ```bash
-python3 scripts/run_eval.py --runner claude --skill-environment isolated --claude-effort medium --bundle-profile balanced
+uv run python scripts/run_eval.py --runner claude --skill-environment isolated --claude-effort medium --bundle-profile balanced
 ```
 
 Notes:
@@ -62,7 +64,7 @@ Default runner:
 Recommended command:
 
 ```bash
-python3 scripts/trigger_eval.py --runner claude --skill-environment isolated --answer-reasoning-effort medium --judge-reasoning-effort low
+uv run python scripts/trigger_eval.py --runner claude --skill-environment isolated --answer-reasoning-effort medium --judge-reasoning-effort low
 ```
 
 Interpretation:
@@ -112,9 +114,9 @@ When editing the skill:
 Recommended order:
 
 ```bash
-python3 scripts/quick_validate.py
-python3 scripts/trigger_eval.py --runner claude --skill-environment isolated --case <target-case>
-python3 scripts/run_eval.py --runner claude --skill-environment isolated --case <target-case>
+uv run python scripts/quick_validate.py
+uv run python scripts/trigger_eval.py --runner claude --skill-environment isolated --case <target-case>
+uv run python scripts/run_eval.py --runner claude --skill-environment isolated --case <target-case>
 ```
 
 ## High-Value Regression Cases
@@ -132,7 +134,7 @@ Use them before spending time on full runs.
 Example:
 
 ```bash
-python3 scripts/trigger_eval.py --runner claude --skill-environment isolated \
+uv run python scripts/trigger_eval.py --runner claude --skill-environment isolated \
   --case trigger-direct-decide-refactor-choice \
   --case non-trigger-obvious-low-risk-choice \
   --case non-trigger-debugging-adjacent

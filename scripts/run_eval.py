@@ -19,6 +19,7 @@ if str(SCRIPT_DIR) not in sys.path:
 from codex_isolation import claude_home_environment, codex_home_environment
 
 ROOT = Path(__file__).resolve().parent.parent
+SKILL_ROOT = ROOT / "skills" / "thinking-clarity"
 CASES_PATH = ROOT / "scripts" / "validation_cases.json"
 DEFAULT_BASE_URL = "https://api.openai.com/v1"
 DEFAULT_OPENAI_MODEL = "gpt-4o-mini"
@@ -88,14 +89,14 @@ CANONICAL_SECTION_KEYS = [
     "main_tradeoff_or_risk",
 ]
 WORKFLOW_FILE_PATHS = {
-    "clarify": ROOT / "workflows" / "clarify.md",
-    "deconstruct": ROOT / "workflows" / "deconstruct.md",
-    "simplify": ROOT / "workflows" / "simplify.md",
-    "decide": ROOT / "workflows" / "decide.md",
+    "clarify": SKILL_ROOT / "workflows" / "clarify.md",
+    "deconstruct": SKILL_ROOT / "workflows" / "deconstruct.md",
+    "simplify": SKILL_ROOT / "workflows" / "simplify.md",
+    "decide": SKILL_ROOT / "workflows" / "decide.md",
 }
 BASE_BUNDLE_FILES = [
-    ("SKILL.md", ROOT / "SKILL.md"),
-    ("agents/openai.yaml", ROOT / "agents" / "openai.yaml"),
+    ("SKILL.md", SKILL_ROOT / "SKILL.md"),
+    ("agents/openai.yaml", SKILL_ROOT / "agents" / "openai.yaml"),
 ]
 
 
@@ -179,9 +180,9 @@ def build_skill_bundle(case: dict, bundle_profile: str) -> str:
                 ("workflows/deconstruct.md", WORKFLOW_FILE_PATHS["deconstruct"]),
                 ("workflows/simplify.md", WORKFLOW_FILE_PATHS["simplify"]),
                 ("workflows/decide.md", WORKFLOW_FILE_PATHS["decide"]),
-                ("references/anti-patterns.md", ROOT / "references" / "anti-patterns.md"),
-                ("references/output-patterns.md", ROOT / "references" / "output-patterns.md"),
-                ("references/examples.md", ROOT / "references" / "examples.md"),
+                ("references/anti-patterns.md", SKILL_ROOT / "references" / "anti-patterns.md"),
+                ("references/output-patterns.md", SKILL_ROOT / "references" / "output-patterns.md"),
+                ("references/examples.md", SKILL_ROOT / "references" / "examples.md"),
             ]
         )
     else:
@@ -190,14 +191,14 @@ def build_skill_bundle(case: dict, bundle_profile: str) -> str:
 
         if case["should_trigger"]:
             files.append(
-                ("references/output-patterns.md", ROOT / "references" / "output-patterns.md")
+                ("references/output-patterns.md", SKILL_ROOT / "references" / "output-patterns.md")
             )
         if should_include_anti_patterns(case):
             files.append(
-                ("references/anti-patterns.md", ROOT / "references" / "anti-patterns.md")
+                ("references/anti-patterns.md", SKILL_ROOT / "references" / "anti-patterns.md")
             )
         if should_include_examples(case, bundle_profile):
-            files.append(("references/examples.md", ROOT / "references" / "examples.md"))
+            files.append(("references/examples.md", SKILL_ROOT / "references" / "examples.md"))
 
     parts = []
     for label, path in unique_in_order([(label, str(path)) for label, path in files]):

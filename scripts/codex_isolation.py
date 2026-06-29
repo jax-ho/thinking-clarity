@@ -8,21 +8,14 @@ from pathlib import Path
 import json
 
 ROOT = Path(__file__).resolve().parent.parent
+SKILL_ROOT = ROOT / "skills" / "thinking-clarity"
 SKILL_NAME = "thinking-clarity"
-SKILL_COPY_PATHS = [
-    "SKILL.md",
-    "agents",
-    "references",
-    "scripts",
-    "workflows",
-]
 
 
 def install_skill_tree(destination: Path) -> None:
     destination.mkdir(parents=True, exist_ok=True)
-    for relative in SKILL_COPY_PATHS:
-        source = ROOT / relative
-        target = destination / relative
+    for source in SKILL_ROOT.iterdir():
+        target = destination / source.name
         if source.is_dir():
             shutil.copytree(source, target)
         else:

@@ -22,6 +22,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest
 
+    - name: Run static validation
+      run: |
+        python scripts/quick_validate.py
+
     - name: Run tests
       run: |
         python -m pytest tests/ -v

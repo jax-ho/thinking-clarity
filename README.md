@@ -2,11 +2,11 @@
 
 A skill for turning messy, high-value questions into clearer judgments and more executable next moves.
 
-This skill is designed for situations where an agent is at risk of overcomplicating the problem, accepting soft constraints as fixed reality, or producing long analysis without a decision.
+Use it when an agent is at risk of overcomplicating the problem, accepting soft constraints as fixed reality, or producing long analysis without a decision.
 
 ## Quick Example
 
-Typical prompts that fit this skill:
+Typical prompts that fit:
 
 - "Should we split this service now, or are we solving the wrong problem?"
 - "What is the smallest launch scope that still proves this product is real?"
@@ -50,59 +50,127 @@ This skill is built from three classic reasoning moves:
 
 The point is not to sound deeper. The point is to get from confusion to a clearer judgment faster.
 
-## Repository Structure
+## Install
 
-- [SKILL.md](./SKILL.md): main skill contract and routing
-- [workflows](./workflows): workflow-specific guidance
-- [references](./references): anti-patterns, output shapes, examples
-- [scripts](./scripts): validation and evaluation tooling
-
-## Install Locally
-
-If you are developing or editing the skill locally, link the repo into your agent's skills directory.
-
-### Codex
+Install it with the `skills` CLI:
 
 ```bash
-mkdir -p ~/.codex/skills
-ln -s <repo-path> ~/.codex/skills/thinking-clarity
+npx skills add https://github.com/jax-ho/thinking-clarity --skill thinking-clarity
 ```
 
-### Claude Code
+The shorter GitHub shorthand also works:
 
 ```bash
-mkdir -p ~/.claude/skills
-ln -s <repo-path> ~/.claude/skills/thinking-clarity
+npx skills add jax-ho/thinking-clarity
 ```
 
-Restart the agent after linking.
-
-## Install From GitHub
-
-Once the repo is published, a practical install path is:
+To inspect the available skill before installing:
 
 ```bash
-npx skills add <owner>/<repo>
+npx skills add https://github.com/jax-ho/thinking-clarity --skill thinking-clarity --list
 ```
 
-If you want users to discover and install the skill more easily, GitHub should be the canonical source.
+To try the skill without installing it permanently:
 
-## Validate
+```bash
+npx skills use https://github.com/jax-ho/thinking-clarity --skill thinking-clarity
+```
+
+## Local Development
+
+From a local clone, list the detected skills:
+
+```bash
+npx skills add . --skill thinking-clarity --list
+```
+
+Install the local working tree:
+
+```bash
+npx skills add . --skill thinking-clarity
+```
+
+If you specifically want a manual Codex install, copy the skill folder:
+
+```bash
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+cp -R skills/thinking-clarity "${CODEX_HOME:-$HOME/.codex}/skills/thinking-clarity"
+```
+
+## Repository Layout
+
+```text
+.
+├── skills/
+│   └── thinking-clarity/
+│       ├── SKILL.md
+│       ├── agents/
+│       │   └── openai.yaml
+│       ├── references/
+│       │   ├── anti-patterns.md
+│       │   ├── examples.md
+│       │   └── output-patterns.md
+│       └── workflows/
+│           ├── clarify.md
+│           ├── decide.md
+│           ├── deconstruct.md
+│           └── simplify.md
+├── scripts/
+│   ├── quick_validate.py
+│   ├── run_eval.py
+│   ├── trigger_eval.py
+│   └── USAGE.md
+├── tests/
+│   ├── test_run_eval.py
+│   └── test_trigger_eval.py
+├── pyproject.toml
+└── README.md
+```
+
+Only `skills/thinking-clarity/` is the installable skill package. Repository scripts, tests, CI, and Python project files stay outside that folder.
+
+## Skill Package
+
+- [SKILL.md](./skills/thinking-clarity/SKILL.md): main skill contract and routing
+- [workflows](./skills/thinking-clarity/workflows): workflow-specific guidance
+- [references](./skills/thinking-clarity/references): anti-patterns, output shapes, and examples
+- [agents/openai.yaml](./skills/thinking-clarity/agents/openai.yaml): OpenAI-oriented prompt packaging
+
+## Validation
 
 Run static validation first:
 
 ```bash
-python3 scripts/quick_validate.py
+uv run python scripts/quick_validate.py
 ```
 
-Useful next checks:
+Run unit tests:
 
 ```bash
-python3 scripts/trigger_eval.py --runner claude --skill-environment isolated
-python3 scripts/run_eval.py --runner claude --skill-environment isolated
+uv run pytest
+```
+
+The same checks can also be run with system Python when dependencies are already available:
+
+```bash
+python3 scripts/quick_validate.py
+python3 -m pytest tests/ -v
+```
+
+Useful next eval checks:
+
+```bash
+uv run python scripts/trigger_eval.py --runner claude --skill-environment isolated
+uv run python scripts/run_eval.py --runner claude --skill-environment isolated
 ```
 
 More detail is in [scripts/USAGE.md](./scripts/USAGE.md).
+
+## Evaluation
+
+Use `trigger_eval.py` as the primary usability signal. It checks whether the skill actually wins the right prompts and stays out of the wrong ones.
+
+Use `run_eval.py` as a contract check for workflow choice, response mode, and required fields.
 
 ## Current Status
 
@@ -111,14 +179,3 @@ The skill is in a shareable state and works well on most high-value trigger case
 Current known residual risk:
 
 - direct-decision prompts can still occasionally under-express the main tradeoff in real trigger tests, depending on model behavior
-
-## Share It
-
-The practical distribution path is:
-
-1. publish this repo to GitHub
-2. verify install from the GitHub URL or repo name
-3. share it via `npx skills add ...`
-4. let `skills.sh` act as the discovery layer once installs start happening
-
-For public discovery, GitHub is the right first step. `skills.sh` is best treated as a distribution and discovery layer on top of that.
